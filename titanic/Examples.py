@@ -14,3 +14,5 @@ df.to_csv('train2.csv')
 print(df.isnull().sum().sort_values(ascending=False))#vres posa(athrisma 1+1..) stixia kathe stilis einai null kai typose te se fthinousa
 #print(df['Embarked'].mode()[0])
 df['Embarked']=df['Embarked'].fillna(df['Embarked'].mode()[0])#osa embarked einai null siblirose ta me to pio sixno(megaliteri pithanotita emfanisis)
+df.to_csv('train2.csv')
+print(df.isnull().sum().sort_values(ascending=False))#vres posa(athrisma 1+1..) stixia kathe stilis einai null kai typose te se fthinousa
