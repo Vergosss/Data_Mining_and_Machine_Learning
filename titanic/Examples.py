@@ -16,3 +16,8 @@ print(df.isnull().sum().sort_values(ascending=False))#vres posa(athrisma 1+1..) 
 df['Embarked']=df['Embarked'].fillna(df['Embarked'].mode()[0])#osa embarked einai null siblirose ta me to pio sixno(megaliteri pithanotita emfanisis)
 df.to_csv('train2.csv')
 print(df.isnull().sum().sort_values(ascending=False))#vres posa(athrisma 1+1..) stixia kathe stilis einai null kai typose te se fthinousa
+df['Sex']=df['Sex'].map({'female':0, 'male':1})#antistixisi tou female se 0 kai tou male se 1
+print(df['Sex'].head(10))#ektyposi ton proton 10 stixion tou sex attribute
+print(df['Embarked'].describe())#perigrafh tou attribute embarked
+df=pd.get_dummies(df,columns=['Embarked'])#gia kathe grammi tou embarked deikse an einai true h false gia kathe mia apo tis dynates times tou embarked
+print(df.head())#typose ta prota 5
