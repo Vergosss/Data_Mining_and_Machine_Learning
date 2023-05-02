@@ -21,3 +21,24 @@ print(df['Sex'].head(10))#ektyposi ton proton 10 stixion tou sex attribute
 print(df['Embarked'].describe())#perigrafh tou attribute embarked
 df=pd.get_dummies(df,columns=['Embarked'])#gia kathe grammi tou embarked deikse an einai true h false gia kathe mia apo tis dynates times tou embarked
 print(df.head())#typose ta prota 5
+print(df['Cabin'])#typose ta stixia tou attribute cabin
+deck=df['Cabin'].str[0]#vale sta stixia tou cabin MONO to proto tous gramma
+df['Cabin']=deck#vale sta stixia tou cabin MONO to proto tous gramma
+print(df.describe())#periegrapse kathe attribute tou dataset
+#print(df)#ektypose to dataset
+print(df['Cabin'])
+lista=list(df['Cabin'].unique())#ftiakse mia lista me ta diakrita(to alfavito) tou attribute cabin
+print(lista)#typose thn
+map2={item: lista.index(item) for item in lista} #ftiaxnei ena dictionary opou stixio:thesi tou sti lista gia kathe stixio ths listas
+df['Cabin']=df['Cabin'].map(map2)#antistixise ta
+print(df['Cabin'].head(3))#typose ta prota 3 nea cabins
+plt.figure('Passenger over age')
+#sb.distplot(df[df['Survived']==1].Age.dropna(),label='Survived',bins=15,kde=False)#apo aytous pou zisane dikse ilikia kai rikse ta nulls se 15 kadous
+#sb.distplot(df[df['Survived']==0].Age.dropna(),label='Not Survived',bins=15,kde=False)#apo aytous pou de zisane dikse ilikia kai rikse ta nulls se 15 kadous
+#sb.distplot(df[df['Survived']==1 & df['Sex']==1].Age.dropna(),label='Survived',bins=15,kde=False)#apo aytous pou zisane dikse ilikia kai rikse ta nulls se 15 kadous
+#anti afto kalytera:
+men=df[df['Sex']==1]
+sb.distplot(men[men['Survived']==1].Age.dropna(),label='Survived',bins=15,kde=False)#apo aytous pou zisane dikse ilikia kai rikse ta nulls se 15 kadous
+plt.legend()
+plt.title(label='Passengers over age')
+plt.show()
