@@ -1,6 +1,17 @@
 import seaborn as sb
 from matplotlib import pyplot as plt
 import pandas as pd
+#import ML Libraries
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.neural_network import MLPClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score
+##
 dataset='train.csv'
 df=pd.read_csv(dataset)
 df.info()#gia kathe sthlh deixnei ton arithmo,onoma,mh nulls,typo dedomenon
@@ -60,3 +71,26 @@ df = df.drop(['Name'], axis=1)#lose info an afereso to onoma
 corrdf=df.drop(['PassengerId'], axis=1)#rikse to passengerid
 sb.heatmap(corrdf.corr(), annot=True)#kane heatmap tis sysxetisis metaxy ton attributes
 plt.show()#deikse th grafiki
+def select_classifier(option):
+    if option == 1:
+        classifier = KNeighborsClassifier(p=1,n_neighbors=3)#K-NN
+    elif option == 2:
+        classifier = SVC(kernel='Linear', C=0.001, random_state=42)#support vector machine
+    elif option == 3:
+        classifier = DecisionTreeClassifier(max_depth=3, criterion='entropy', random_state=42)#ekeino to video me tis entropies
+    elif option == 4:
+        classifier = RandomForestClassifier(n_estimators=100, criterion='entropy', random_state=42)
+    elif option == 5:
+        classifier = MLPClassifier(max_iter=10000, activation='logistic', random_state=42)
+    elif option == 6:
+        classifier = AdaBoostClassifier(n_estimators=200, random_state=42)
+    elif option == 7:
+        classifier = GaussianNB()
+    else:
+        raise ValueError('option values are: 1,2,3,4,5,6,7,8')
+    return classifier
+
+def run_classifier(X,Y,classifier=1):
+    X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.3,random_state=42)
+    model = select_classifier(classifier)
+    model.fit(X_train,Y_train)
