@@ -32,13 +32,22 @@ print(lista)#typose thn
 map2={item: lista.index(item) for item in lista} #ftiaxnei ena dictionary opou stixio:thesi tou sti lista gia kathe stixio ths listas
 df['Cabin']=df['Cabin'].map(map2)#antistixise ta
 print(df['Cabin'].head(3))#typose ta prota 3 nea cabins
-plt.figure('Passenger over age')
+plt.figure('Male Passengers over age')
 #sb.distplot(df[df['Survived']==1].Age.dropna(),label='Survived',bins=15,kde=False)#apo aytous pou zisane dikse ilikia kai rikse ta nulls se 15 kadous
 #sb.distplot(df[df['Survived']==0].Age.dropna(),label='Not Survived',bins=15,kde=False)#apo aytous pou de zisane dikse ilikia kai rikse ta nulls se 15 kadous
 #sb.distplot(df[df['Survived']==1 & df['Sex']==1].Age.dropna(),label='Survived',bins=15,kde=False)#apo aytous pou zisane dikse ilikia kai rikse ta nulls se 15 kadous
 #anti afto kalytera:
-men=df[df['Sex']==1]
-sb.distplot(men[men['Survived']==1].Age.dropna(),label='Survived',bins=15,kde=False)#apo aytous pou zisane dikse ilikia kai rikse ta nulls se 15 kadous
+men=df[df['Sex']==1]#pare tous antres mono apo to dataset
+women=df[df['Sex']==0]#pare tis gynaikes mono apo to dataset
+sb.distplot(men[men['Survived']==1].Age.dropna(),label='Survived',bins=15,kde=False)#apo tous antres pou zisane dikse ilikia kai rikse ta nulls se 15 kadous
+sb.distplot(men[men['Survived']==0].Age.dropna(),label='Not Survived',bins=15,kde=False)#apo tous antres pou de zisane dikse ilikia kai rikse ta nulls se 15 kadous
 plt.legend()
-plt.title(label='Passengers over age')
+plt.title(label='Male Passengers over age')
+plt.show()
+##Correlations sex,age and survivabillity
+plt.figure('Female Passengers over age')
+sb.distplot(women[women['Survived']==1].Age.dropna(),label='Survived',bins=15,kde=False)#apo tis gynaikes pou zisane dikse ilikia kai rikse ta nulls se 15 kadous
+sb.distplot(women[women['Survived']==0].Age.dropna(),label='Not Survived',bins=15,kde=False)#apo tis gynaikes pou de zisane dikse ilikia kai rikse ta nulls se 15 kadous
+plt.legend()
+plt.title(label='Female Passengers over age')
 plt.show()
