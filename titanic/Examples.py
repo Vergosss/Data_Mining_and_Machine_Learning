@@ -91,6 +91,22 @@ def select_classifier(option):
     return classifier
 
 def run_classifier(X,Y,classifier=1):
-    X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.3,random_state=42)
+    X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.3,random_state=42)#x eisodos y eksodos x train 80% test 20%
     model = select_classifier(classifier)
     model.fit(X_train,Y_train)
+    predictions=model.predict(X_test)
+    print("-------------------------")
+    print(f"Classifier {option} yields training accuracy of {model.score(X_train,Y_train)}\n with a testing accuracy of {accuracy_score(Y_test,predictions)}")
+    return classifier, model.score(X_train, Y_train), accuracy_score(Y_test, predictions)
+
+X = corrdf.drop(['Survived'],axis = 1)#ola ta attributes ektos tou stoxou/apotelesmatos(to survived)
+Y = corrdf['Survived']#mono h sthlh tou survived
+models = ["k-NN", "SVM", "Dec Tree","R Forest", "N_Net",
+          "AdaBoost", "Naive Bayes"]#lista modelon
+models_train_acc = []
+models_test_acc = []
+for model in models:
+    option = models.index(model)+1#apo th lista pare  kathe modelo
+    classifier, train_acc, test_acc = run_classifier(X,Y,option)#epestrepse algorithmo kai akriveia algorithmou
+    models_train_acc.append(train_acc)
+    models_test_acc.append(test_acc)
