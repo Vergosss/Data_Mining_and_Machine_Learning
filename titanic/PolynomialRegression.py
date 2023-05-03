@@ -12,7 +12,7 @@ plt.plot(axonas_x, model(axonas_x))#plotare ston x ta dedomena me th kabylh tou 
 plt.show()#deikse th grafiki
 print(r2_score(y, model(x)))#2 orismata eksodos-modelo(eisodos)-poli konta sto 1 kalh sysxetisi
 #provlepsi: vazo mia timi sto model
-print(model(17))
+print(model(17))#kalh sxetika provlepsi konta sto 17 me peta 80+
 #dedomena pou de tairiazoun sto polionimo regression
 x_ = [89,43,36,36,95,10,66,34,38,20,26,29,48,64,6,5,36,66,72,40]
 y_ = [21,46,3,35,67,95,53,72,58,10,26,34,90,33,38,20,56,2,47,15]
