@@ -22,3 +22,4 @@ plt.scatter(x_, y_)#diespeire ston x kai y ta dedomena
 plt.plot(axonas_x, model2(axonas_x))#plotare ton axona x(ena linspace) me to modelo
 plt.show()#deikse th grafiki
 print(r2_score(y_, model2(x_)))#eksodos-modelo(eisodos)-mikri konta sto 0 mikrh sysxetisi oxi kali gia provlepsis
+print(model2(1))#gia 1 einai peripou 20 kai me peta sto 37!
