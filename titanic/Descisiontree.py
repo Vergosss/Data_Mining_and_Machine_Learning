@@ -23,7 +23,7 @@ print('\n')#nea grammh
 print(Y)#typose stoxo
 dtree=DecisionTreeClassifier()#o ml algorithmos einai to dentro apofashs
 dtree.fit(X, Y)#fitaro/vazo ston algorithmo ta data
-#tree.plot_tree(dtree, feature_names=features)#ta plotaro
+tree.plot_tree(dtree, feature_names=features)#ta plotaro
 #plt.savefig(sys.stdout.buffer)
 #sys.stdout.flush()
 print('[1]->yes and [0]->no. The answer is :')

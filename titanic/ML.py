@@ -15,3 +15,4 @@ df.to_csv('data2.csv')
 dataset2='data2.csv'
 df2=pd.read_csv(dataset2)
 print(df2.isnull().sum().sort_values(ascending=False))#gia kathe sthlh athrizei tis null times se fthinousa seira
+print(df.corr(method='pearson'))
