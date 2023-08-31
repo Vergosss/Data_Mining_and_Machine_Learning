@@ -8,6 +8,9 @@ from IPython.display import display
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
 from datetime import timedelta
 import warnings
 warnings.filterwarnings("ignore")
