@@ -109,7 +109,7 @@ plt.title('Optimal number of clusters')#titlos grafimatos
 plt.xlabel('Number of k')#onomasia aksona x pou einai to k diladi o arithmos ton cluster
 plt.ylabel('WCSS')#onomasia aksona y to wcss
 plt.show()#emfanisi grafikis
-optimal = 4
+optimal = 6
 ##
 #perform clustering
 kmeans = KMeans(n_clusters=optimal)
@@ -163,7 +163,7 @@ plt.title('Optimal number of clusters')#titlos grafimatos
 plt.xlabel('Number of k')#onomasia aksona x pou einai to k diladi o arithmos ton cluster
 plt.ylabel('WCSS')#onomasia aksona y to wcss
 plt.show()#emfanisi grafikis
-optimal = 4
+optimal = 6
 
 ##
 
@@ -225,7 +225,7 @@ plt.title('Optimal number of clusters')#titlos grafimatos
 plt.xlabel('Number of k')#onomasia aksona x pou einai to k diladi o arithmos ton cluster
 plt.ylabel('WCSS')#onomasia aksona y to wcss
 plt.show()#emfanisi grafikis
-optimal = 4
+optimal = 6
 
 ##
 
