@@ -74,6 +74,7 @@ print('---------------------------\nCluster grouped Cases/Population/Case rate d
 print('---------------------------\nCluster grouped Deaths/Population/Death rate data(entity,continent):\n',cluster_grouped2)
 #
 print('---------------------------\nCluster grouped Cases/Total tests/Positivity rate data(entity,continent):\n',cluster_grouped3)
+#
 
 #
 scaled_cluster_grouped2 = StandardScaler().fit_transform(cluster_grouped2)#scale data for improved clustering

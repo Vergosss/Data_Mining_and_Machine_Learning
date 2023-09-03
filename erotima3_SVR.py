@@ -107,7 +107,7 @@ svr_regressor.fit(X_train_scaled,Y_train)#vazo x_train,y_train-ekpaideyo to mode
 
 predicted_cases = svr_regressor.predict(X_test_scaled)#provlepsi krousmaton
 print(predicted_cases)
-predicted_cases = predicted_cases.reshape(-1,1)
+predicted_cases = predicted_cases.reshape(-1,1)#metatropi se 2d array gia na borei na metasximatistei
 
 predicted_cases = StandardScaler().fit_transform(predicted_cases)
 #visualization
@@ -115,7 +115,7 @@ predicted_cases = StandardScaler().fit_transform(predicted_cases)
 #an den kanei kalh provlepsi tote tha diaspeirontai pio poly ta simia sth grafiki
 ###
 Y_test_scaled = pd.DataFrame(Y_test_scaled,columns=columnsY)
-predicted_cases = pd.DataFrame(predicted_cases,columns=columnsY)
+predicted_cases = pd.DataFrame(predicted_cases,columns=columnsY)#metatropi ksana se dataframe
 print('-----------------------\nR2 score is : \n',r2_score(Y_test_scaled,predicted_cases))
 #print('r-square_SVR_Test: ', round(svr_regressor.score(predicted_cases, Y_test_scaled), 2))
 #plot ta y_test(pragmatika) me ayta poy provlepsa
