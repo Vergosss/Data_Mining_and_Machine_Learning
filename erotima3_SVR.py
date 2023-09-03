@@ -101,7 +101,7 @@ Y_test_scaled = StandardScaler().fit_transform(Y_test_scaled)
 #build regressor
 svr_regressor = SVR(kernel='rbf')#grammikos h mh grammikos pyrhnas tou svm linear,rbf ktlp
 #dokimazoume grammiko kernel,polyonimiko,rbf k.o.k
-svr_regressor.fit(X_train_scaled,Y_train)#vazo x_train,y_train-ekpaideyo to modelo -update: vazo tis scaled ekdoseis tous
+svr_regressor.fit(X_train_scaled,Y_train_scaled)#vazo x_train,y_train-ekpaideyo to modelo -update: vazo tis scaled ekdoseis tous
 #provlepsi-prediction-me ta test dedomena
 
 
