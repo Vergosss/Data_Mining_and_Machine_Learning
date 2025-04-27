@@ -6,8 +6,7 @@ import seaborn as sns
 from scipy.stats import zscore
 from IPython.display import display
 from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
 from sklearn.metrics import r2_score
@@ -44,7 +43,7 @@ print('----------------------------------\nEnd date is :',end_date)
 ###
 columns_to_drop = ['Entity','Continent','Latitude','Longitude','Average temperature per year','Hospital beds per 1000 people','Medical doctors per 1000 people','GDP/Capita','Median age','Population aged 65 and over (%)','Deaths']
 
-df_greece=df_greece.drop(columns_to_drop,axis=1)#dropping everything except date,population, daily tests ,cases
+df_greece.drop(columns_to_drop,axis=1,inplace=True)#dropping everything except date,population, daily tests ,cases
 print('----------------------------------\nDataframe:\n',df_greece)
 #
 endDate = end_date.iloc[0] #--->date we want to forecast
@@ -86,41 +85,41 @@ X=X.values#oi algorithmoi trexoun me arithmitika mono dedomena opote pernoume ti
 Y=Y.values
 #scaling
 #train-test split to build the model
-X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size=0.2,random_state=42)#80% train-20%test diaxorismos
+X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size=0.2,random_state=42,shuffle=True)#80% train-20%test diaxorismos
 #X->metavlites eisodou ypoloipa attributes tou dataset, Y-> metavliti/ klash eksodou/stoxos ayto pou theloume na provlepsoume
 #scaling-metasxitismos ton dedomenon gia kalyterh palindromisi
-X_train_scaled = StandardScaler().fit_transform(X_train)
+scaler = MinMaxScaler()
+X_train = scaler.fit_transform(X_train)
 #
-X_test_scaled = StandardScaler().fit_transform(X_test)
+X_test = scaler.transform(X_test)
 #
-Y_train_scaled = Y_train.reshape(-1,1)#metatropi se 2d array
-Y_train_scaled = StandardScaler().fit_transform(Y_train_scaled)
+Y_train = Y_train.reshape(-1,1)#metatropi se 2d array
+Y_train =scaler.fit_transform(Y_train)
 #
-Y_test_scaled = Y_test.reshape(-1,1)##metatropi se 2d array
-Y_test_scaled = StandardScaler().fit_transform(Y_test_scaled)
+Y_test = Y_test.reshape(-1,1)##metatropi se 2d array
+Y_test = scaler.transform(Y_test)
 #build regressor
 svr_regressor = SVR(kernel='rbf')#grammikos h mh grammikos pyrhnas tou svm linear,rbf ktlp
 #dokimazoume grammiko kernel,polyonimiko,rbf k.o.k
-svr_regressor.fit(X_train_scaled,Y_train_scaled)#vazo x_train,y_train-ekpaideyo to modelo -update: vazo tis scaled ekdoseis tous
+svr_regressor.fit(X_train,Y_train)#vazo x_train,y_train-ekpaideyo to modelo -update: vazo tis scaled ekdoseis tous
 #provlepsi-prediction-me ta test dedomena
 
 
-predicted_cases = svr_regressor.predict(X_test_scaled)#provlepsi krousmaton
+predicted_cases = svr_regressor.predict(X_test)#provlepsi krousmaton
 print(predicted_cases)
-predicted_cases = predicted_cases.reshape(-1,1)#metatropi se 2d array gia na borei na metasximatistei
+#predicted_cases = predicted_cases.reshape(-1,1)#metatropi se 2d array gia na borei na metasximatistei
 
-predicted_cases = StandardScaler().fit_transform(predicted_cases)
 #visualization
 #an kanei kalh provlepsh tote h ta simia tis grafikis tha syglinoun se mia eytheia/palindromisi
 #an den kanei kalh provlepsi tote tha diaspeirontai pio poly ta simia sth grafiki
 ###
-Y_test_scaled = pd.DataFrame(Y_test_scaled,columns=columnsY)
+Y_test = pd.DataFrame(Y_test,columns=columnsY)
 predicted_cases = pd.DataFrame(predicted_cases,columns=columnsY)#metatropi ksana se dataframe
-print('-----------------------\nR2 score is : \n',r2_score(Y_test_scaled,predicted_cases))
+print('-----------------------\nR2 score is : \n',r2_score(Y_test,predicted_cases))
 #print('r-square_SVR_Test: ', round(svr_regressor.score(predicted_cases, Y_test_scaled), 2))
 #plot ta y_test(pragmatika) me ayta poy provlepsa
-plt.plot(Y_test_scaled.index,Y_test_scaled.values,label='Actual Cases', linestyle='-', marker='o')
-plt.plot(Y_test_scaled.index,predicted_cases.values,label='Predicted Cases', linestyle='--', marker='x')#plotting actual vs predicted
+plt.plot(Y_test.index,Y_test.values,label='Actual Cases', linestyle='-', marker='o')
+plt.plot(Y_test.index,predicted_cases.values,label='Predicted Cases', linestyle='--', marker='x')#plotting actual vs predicted
 #meso inverse transform boroume na doume tis actual(mh metasxhmatismenes times)
 plt.title('Prediction result of SVM')#plot title
 plt.xlabel('Actual values')
